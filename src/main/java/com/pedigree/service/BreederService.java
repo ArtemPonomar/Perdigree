@@ -22,7 +22,8 @@ public class BreederService {
     }
 
     public Breeder getByKennelName(String kennel){
-        return breederRepository.getByKennelName(kennel);
+        if (breederRepository.getByKennelName(kennel) == null) return null;
+        return breederRepository.getByKennelName(kennel).get(0);
     }
 
     public void save(Breeder breeder){

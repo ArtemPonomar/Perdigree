@@ -1,10 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">БР</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Родословная <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Добавить
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item active" href="add_pet">Питомца</a>
+                    <a class="dropdown-item" href="add_breeder">Заводчика</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Вид</a>
+                    <a class="dropdown-item" href="#">Окрас</a>
+                    <a class="dropdown-item" href="#">Породу</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Мои питомцы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Мои заявки</a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-inline">
+        <button class="btn btn-sm btn-outline-secondary mx-1" type="button">Регистрация</button>
+        <button class="btn btn-sm btn-outline-primary mx-1" type="button">Вход</button>
+        <button class="btn btn-sm btn-outline-warning mx-1" type="button">Выход</button>
 
+    </form>
+</nav>
+<div class="container">
+    <form method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+        <label for="petName">Имя питомца</label>
+        <input type="text" class="form-control" id="petName" name="petName" required>
+        <div class="invalid-feedback">
+            Введите имя питомца
+        </div>
+        <label for="birthDate">Дата рождения</label>
+        <input type="text" class="form-control" id="birthDate" name="birthDate" placeholder="дд.мм.гггг" required>
+        <div class="invalid-feedback">
+            Введите дату рождения питомца
+        </div>
+
+        <label for="species">Вид питомца</label>
+        <select id="species" name="speciesId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getSpecies()}"
+                    th:text="${optVal.getSpecies()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите вид питомца
+        </div>
+        <label for="female">Пол питомца</label>
+        <div class="col-md-4 mb-3 form-check">
+            <input type="radio" class="form-check-input" name="gender" id="female" value="female">
+            <label class="form-check-label" for="female">Самка</label>
+        </div>
+        <div class="col-md-4 mb-3 form-check">
+            <input type="radio" class="form-check-input" name="gender" id="male" value="male">
+            <label class="form-check-label" for="male">Самец</label>
+        </div>
+        <label class="form-check-label" for="photoSelect">Фото питомца</label>
+        <div class="input-group" id="photoSelect">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Загрузить</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" name="photo"
+                       aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Выбрать файл</label>
+            </div>
+        </div>
+
+        <label for="metric">Метрика</label>
+        <input type="text" class="form-control" id="metric" name="metric">
+
+        <label for="breed">Порода питомца</label>
+        <select id="breed" name="breedId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getBreeds()}"
+                    th:text="${optVal.getBreed()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите породу питомца
+        </div>
+        <label for="color">Окрас питомца</label>
+        <select id="color" name="colorId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getColors()}"
+                    th:text="${optVal.getColor()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите окрас питомца
+        </div>
+        <label for="breeder">Заводчик</label>
+        <select id="breeder" name="breederId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getBreeders()}"
+                    th:text="${optVal.getKennelName()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите заводчика
+        </div>
+
+        <label for="father">Отец</label>
+        <select id="father" name="fatherId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getMales()}"
+                    th:text="${optVal.getName() + ' | ' + optVal.getBreeder().getKennelName() + ' | ' + optVal.getBirthday()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите отца вашего питомца
+        </div>
+        <label for="mother">Мать</label>
+        <select id="mother" name="motherId" class="form-control form-control-sm">
+            <option value="" selected>-</option>
+            <option th:each="optVal: ${parameters.getFemales()}"
+                    th:text="${optVal.getName() + ' | ' + optVal.getBreeder().getKennelName() + ' | ' + optVal.getBirthday()}"
+                    th:value="${optVal.getId()}"></option>
+        </select>
+        <div class="invalid-feedback">
+            Выберите мать вашего питомца
+        </div>
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+    </form>
+</div>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'dd.mm.yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+<script>
+// JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and formEvent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+$('#sandbox-container .input-group.date').datepicker({
+    format: "dd.mm.yyyy",
+    maxViewMode: 2,
+    language: "ru"
+});
+</script>
 </body>
 </html>

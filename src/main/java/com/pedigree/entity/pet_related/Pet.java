@@ -2,6 +2,7 @@ package com.pedigree.entity.pet_related;
 
 import com.pedigree.entity.Breeder;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,16 +13,17 @@ public class Pet {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private String pedigreeId;
 
-    @Column(unique = true)
+    @Column
     private String metricId;
 
+    @Column
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "breeder_id")
+    @JoinColumn
     private Breeder breeder;
 
     private String imagePath;
@@ -33,23 +35,23 @@ public class Pet {
     private String birthday;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "species_id")
+    @JoinColumn
     private Species species;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "breed_id")
+    @JoinColumn
     private Breed breed;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "color_id")
+    @JoinColumn
     private Color color;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "father_id")
+    @JoinColumn
     private Pet father;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "mother_id")
+    @JoinColumn
     private Pet mother;
 
     public Long getId() {
