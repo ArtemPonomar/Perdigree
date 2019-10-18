@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 
@@ -37,33 +39,24 @@ public class MeshController {
     }
 
     @RequestMapping(value = "/add_pet", method = RequestMethod.POST)
-    public String savePet(@RequestParam(required = false) String petName,
-                          @RequestParam(required = false) String birthDate,
-                          @RequestParam(required = false) Long speciesId,
-                          @RequestParam(required = false) String gender,
-                          @RequestParam(required = false) File photo,
-                          @RequestParam(required = false) String metric,
-                          @RequestParam(required = false) Long breedId,
-                          @RequestParam(required = false) Long colorId,
-                          @RequestParam(required = false) Long breederId,
-                          @RequestParam(required = false) Long fatherId,
-                          @RequestParam(required = false) Long motherId,
-                          Model model){
+    public ModelAndView savePet(@RequestParam String petName,
+                                @RequestParam String birthDate,
+                                @RequestParam Long speciesId,
+                                @RequestParam String gender,
+                                @RequestParam(required = false) MultipartFile photo,
+                                @RequestParam(required = false) String metric,
+                                @RequestParam Long breedId,
+                                @RequestParam Long colorId,
+                                @RequestParam Long breederId,
+                                @RequestParam(required = false) Long fatherId,
+                                @RequestParam(required = false) Long motherId,
+                                Model model){
         System.out.println("test");
-        petService.savePetFromParameters(petName, birthDate, speciesId, gender, photo, metric, breedId, colorId, breederId, fatherId, motherId);
+        try {
+            petService.savePetFromParameters(petName, birthDate, speciesId, gender, photo, metric, breedId, colorId, breederId, fatherId, motherId);
+        } catch (IllegalArgumentException e){
 
-        PetFormParameters petFormParameters = petService.getPetFormParameters();
-        model.addAttribute("parameters", petFormParameters);
-        return "add_pet";
-    }
-
-    @RequestMapping(value = "/add_breeder", method = RequestMethod.GET)
-    public String addBreeder(Model model){
-        return "add_breeder";
-    }
-
-    @RequestMapping(value = "/add_breeder", method = RequestMethod.POST)
-    public String saveBreeder(Model model){
-        return "add_breeder";
+        }
+        return new ModelAndView("redirect:/add_pet");
     }
 }

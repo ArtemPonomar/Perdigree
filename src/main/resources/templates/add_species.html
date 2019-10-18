@@ -46,15 +46,14 @@
         <button class="btn btn-sm btn-outline-secondary mx-1" type="button">Регистрация</button>
         <button class="btn btn-sm btn-outline-primary mx-1" type="button">Вход</button>
         <button class="btn btn-sm btn-outline-warning mx-1" type="button">Выход</button>
-
     </form>
 </nav>
 <div class="container d-flex align-self-center">
-    <form>
+    <form method="post" action="add_species">
         <div class="form-group">
-            <label class="mt-1" for="pedigreeId">Номер родословной</label>
-            <input type="text" class="form-control" id="pedigreeId" name="pedigreeId">
-            <button class="btn btn-primary mt-2" type="submit">Получить</button>
+            <label class="mt-1" for="speciesName">Название вида</label>
+            <input type="text" class="form-control" id="speciesName" name="speciesName">
+            <button class="btn btn-primary mt-2" type="submit">Сохранить</button>
         </div>
     </form>
 </div>

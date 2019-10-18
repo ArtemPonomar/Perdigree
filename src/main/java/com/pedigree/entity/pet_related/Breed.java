@@ -9,12 +9,12 @@ public class Breed {
     @GeneratedValue
     private Long id;
 
-    private String breed;
+    private String breedName;
 
     public Breed(){}
 
     public Breed(String breedName){
-        this.breed = breedName;
+        this.breedName = breedName;
     }
 
     public Long getId() {
@@ -25,12 +25,12 @@ public class Breed {
         this.id = id;
     }
 
-    public String getBreed() {
-        return breed;
+    public String getBreedName() {
+        return breedName;
     }
 
-    public void setBreed(String breed) {
-        this.breed = breed;
+    public void setBreedName(String breedName) {
+        this.breedName = breedName;
     }
 
     @Override
@@ -38,11 +38,11 @@ public class Breed {
         if (this == o) return true;
         if (!(o instanceof Breed)) return false;
         Breed breed1 = (Breed) o;
-        return Objects.equals(breed, breed1.breed);
+        return Objects.equals(breedName, breed1.breedName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.breed);
+        return Objects.hash(this.breedName);
     }
 }

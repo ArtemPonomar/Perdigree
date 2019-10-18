@@ -4,8 +4,8 @@ import com.pedigree.entity.Breeder;
 import com.pedigree.repository.BreederRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,24 +13,22 @@ public class BreederService {
     @Autowired
     private BreederRepository breederRepository;
 
-    public List<Breeder> getBreeders(){
-        List<Breeder> breeders = new ArrayList<>();
-        for (Breeder breeder : breederRepository.findAll()){
-            breeders.add(breeder);
+    public List<Breeder> getBreeders() {
+        return breederRepository.findAll();
+    }
+
+    public Breeder findByKennelName(String kennel) {
+        List<Breeder> searchResult = breederRepository.findByKennelNameIgnoreCase(kennel);
+        if (searchResult.size() == 0) return null;
+        return searchResult.get(0);
+    }
+
+    @Transactional
+    public void save(Breeder breeder) {
+        List<Breeder> dups = breederRepository.findByKennelNameIgnoreCase(breeder.getKennelName());
+        if (dups.size() != 0) {
+            breeder.setId(dups.get(0).getId());
         }
-        return breeders;
-    }
-
-    public Breeder getByKennelName(String kennel){
-        if (breederRepository.getByKennelName(kennel) == null) return null;
-        return breederRepository.getByKennelName(kennel).get(0);
-    }
-
-    public void save(Breeder breeder){
         breederRepository.save(breeder);
-    }
-
-    public void save(Iterable<Breeder> breeders){
-        breederRepository.saveAll(breeders);
     }
 }

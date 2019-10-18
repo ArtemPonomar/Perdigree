@@ -9,12 +9,12 @@ public class Species {
     private Long id;
 
     @Column(unique = true)
-    private String species;
+    private String speciesName;
 
     public Species(){}
 
-    public Species(String species) {
-        this.species = species;
+    public Species(String speciesName) {
+        this.speciesName = speciesName;
     }
 
     public Long getId() {
@@ -25,11 +25,11 @@ public class Species {
         this.id = id;
     }
 
-    public String getSpecies() {
-        return species;
+    public String getSpeciesName() {
+        return speciesName;
     }
 
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setSpeciesName(String speciesName) {
+        this.speciesName = speciesName;
     }
 }

@@ -4,12 +4,10 @@ import com.pedigree.entity.PetFormParameters;
 import com.pedigree.entity.pet_related.*;
 import com.pedigree.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
 
 @Service
@@ -32,7 +30,7 @@ public class PetService {
     @Autowired
     private SpeciesRepository speciesRepository;
 
-    public void savePetFromParameters(String petName, String birthDate, Long speciesId, String gender, File photo, String metric, Long breedId, Long colorId, Long breederId, Long fatherId, Long motherId){
+    public void savePetFromParameters(String petName, String birthDate, Long speciesId, String gender, MultipartFile photo, String metric, Long breedId, Long colorId, Long breederId, Long fatherId, Long motherId) throws IllegalArgumentException{
         Pet newPet = new Pet();
         newPet.setName(petName);
         newPet.setBirthday(birthDate);
@@ -46,6 +44,7 @@ public class PetService {
         newPet.setMother(petRepository.findById(motherId).get());
         savePet(newPet);
         photoService.savePhoto(newPet, photo);
+        savePet(newPet);
     }
 
     public PetFormParameters getPetFormParameters(){
@@ -72,15 +71,15 @@ public class PetService {
         if (pet.getMother() != null) pet.setMother(petRepository.findByNameAndBreeder(pet.getMother().getName(), pet.getMother().getBreeder()).get(0));
         if (pet.getFather() != null) pet.setFather(petRepository.findByNameAndBreeder(pet.getFather().getName(), pet.getFather().getBreeder()).get(0));
 
-        if (speciesRepository.findBySpecies(pet.getSpecies().getSpecies()).size() == 0) speciesRepository.save(pet.getSpecies());
-        if (colorRepository.findByColor(pet.getColor().getColor()).size() == 0) colorRepository.save(pet.getColor());
-        if (breedRepository.findByBreed(pet.getBreed().getBreed()).size() == 0) breedRepository.save(pet.getBreed());
-        if (breederRepository.getByKennelName(pet.getBreeder().getKennelName()).size() == 0) breederRepository.save(pet.getBreeder());
+        if (speciesRepository.findBySpeciesNameIgnoreCase(pet.getSpecies().getSpeciesName()).size() == 0) speciesRepository.save(pet.getSpecies());
+        if (colorRepository.findByColorNameIgnoreCase(pet.getColor().getColorName()).size() == 0) colorRepository.save(pet.getColor());
+        if (breedRepository.findByBreedNameIgnoreCase(pet.getBreed().getBreedName()).size() == 0) breedRepository.save(pet.getBreed());
+        if (breederRepository.findByKennelNameIgnoreCase(pet.getBreeder().getKennelName()).size() == 0) breederRepository.save(pet.getBreeder());
 
-        pet.setSpecies(speciesRepository.findBySpecies(pet.getSpecies().getSpecies()).get(0));
-        pet.setColor(colorRepository.findByColor(pet.getColor().getColor()).get(0));
-        pet.setBreed(breedRepository.findByBreed(pet.getBreed().getBreed()).get(0));
-        pet.setBreeder(breederRepository.getByKennelName(pet.getBreeder().getKennelName()).get(0));
+        pet.setSpecies(speciesRepository.findBySpeciesNameIgnoreCase(pet.getSpecies().getSpeciesName()).get(0));
+        pet.setColor(colorRepository.findByColorNameIgnoreCase(pet.getColor().getColorName()).get(0));
+        pet.setBreed(breedRepository.findByBreedNameIgnoreCase(pet.getBreed().getBreedName()).get(0));
+        pet.setBreeder(breederRepository.findByKennelNameIgnoreCase(pet.getBreeder().getKennelName()).get(0));
 
         petRepository.save(pet);
     }

@@ -15,9 +15,7 @@ public class DownloadConfig {
     @Bean
     MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("5MB");
-        factory.setMaxFileSize("128KB");
-        factory.setMaxRequestSize("128KB");
+        factory.setMaxFileSize("10MB");
         return factory.createMultipartConfig();
     }
 

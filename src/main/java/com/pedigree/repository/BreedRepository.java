@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface BreedRepository extends CrudRepository<Breed,Long> {
-    List<Breed> findByBreed(String breed);
+    List<Breed> findByBreedNameIgnoreCase(String breedName);
     List<Breed> findAll();
 }

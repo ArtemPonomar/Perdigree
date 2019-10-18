@@ -9,12 +9,12 @@ public class Color {
     private Long id;
 
     @Column
-    private String color;
+    private String colorName;
 
     public  Color(){};
 
-    public Color(String color) {
-        this.color = color;
+    public Color(String colorName) {
+        this.colorName = colorName;
     }
 
     public Long getId() {
@@ -25,11 +25,11 @@ public class Color {
         this.id = id;
     }
 
-    public String getColor() {
-        return color;
+    public String getColorName() {
+        return colorName;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 }

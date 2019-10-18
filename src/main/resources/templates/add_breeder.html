@@ -17,19 +17,19 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Родословная <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="pedigree">Родословная <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Добавить
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="add_pet">Питомца</a>
-                    <a class="dropdown-item active" href="add_breeder">Заводчика</a>
+                    <a class="dropdown-item" href="add_breeder">Заводчика</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Вид</a>
-                    <a class="dropdown-item" href="#">Окрас</a>
-                    <a class="dropdown-item" href="#">Породу</a>
+                    <a class="dropdown-item" href="add_species">Вид</a>
+                    <a class="dropdown-item" href="add_color">Окрас</a>
+                    <a class="dropdown-item" href="add_breed">Породу</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -48,38 +48,53 @@
     </form>
 </nav>
 <div class="container">
-    <form method="post" class="needs-validation" novalidate>
+    <form method="post" action="add_breeder" class="needs-validation" novalidate>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_name">Имя заводчика</label>
-                <input type="text" class="form-control" id="breeder_name" required>
+                <input type="text" class="form-control" id="breeder_name" name="breederName" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="kennel_name">Название питомника </label>
-                <input type="text" class="form-control" id="kennel_name" required>
+                <input type="text" class="form-control" id="kennel_name" name="kennelName" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_email">Почта заводчика</label>
-                <input type="email" class="form-control" id="breeder_email" required>
+                <input type="email" class="form-control" id="breeder_email" name="breederEmail" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="breeder_number">Телефон заводчика</label>
-                <input type="tel" class="form-control" id="breeder_number" required>
+                <input type="tel" class="form-control" id="breeder_number" name="breederNumber" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_site_address">Сайт питомника</label>
-                <input type="url" class="form-control" id="breeder_site_address">
+                <input type="url" class="form-control" id="breeder_site_address" name="breederSite" placeholder="http://...">
+                <div class="invalid-feedback">
+                    Введите адрес сайта, начиная с http://, или оставьте поле пустым
+                </div>
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-primary mt-2" type="submit">Сохранить</button>
     </form>
 </div>
 <script>

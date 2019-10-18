@@ -7,10 +7,14 @@ import com.pedigree.repository.ColorRepository;
 import com.pedigree.repository.PetRepository;
 import com.pedigree.service.BreederService;
 import com.pedigree.service.PetService;
+import com.pedigree.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.IOException;
 
 
 @Component
@@ -31,13 +35,14 @@ public class AppReadyListner {
     @EventListener(ApplicationReadyEvent.class)
     private void init() {
 
+
 //        PetFormParameters pfp = petService.getPetFormParameters();
 //        for (Breed breed : pfp.getBreeds()){
-//            System.out.println(breed.getBreed() + " ");
+//            System.out.println(breed.getBreedName() + " ");
 //        }
 //        System.out.println("---------------------------------");
 //        for (Color color : pfp.getColors()){
-//            System.out.println(color.getColor() + " ");
+//            System.out.println(color.getColorName() + " ");
 //        }
 //        System.out.println("---------------------------------");
 //        for (Breeder breeder : pfp.getBreeders()){
@@ -52,22 +57,23 @@ public class AppReadyListner {
 //            System.out.println(m.getName() + " ");
 //        }
 //        System.out.println("---------------------------------");
-//        for (Species s : pfp.getSpecies()){
-//            System.out.println(s.getSpecies() + " ");
+//        for (Species s : pfp.getSpeciesName()){
+//            System.out.println(s.getSpeciesName() + " ");
 //        }
 //        System.out.println("---------------------------------");
 //
-//        Breeder breeder = new Breeder();
-//        breeder.setKennelName("Терем-теремок");
-//        breeder.setBreederName("Пономаренко Людмила");
-//        breeder.setEmail("terem-teremok@ukr.net");
-//        breeder.setPhoneNumber("067 218-60-18");
-//        breeder.setSiteAddress("https://terem-teremok.kiev.ua/");
-//
+        Breeder breeder = new Breeder();
+        breeder.setKennelName("Терем-теремок");
+        breeder.setBreederName("Пономаренко Людмила");
+        breeder.setEmail("terem-teremok@ukr.net");
+        breeder.setPhoneNumber("067 218-60-18");
+        breeder.setSiteAddress("https://terem-teremok.kiev.ua/");
+        breederService.save(breeder);
+
         Pet mom = new Pet();
         mom.setBirthday("19.06.2011");
         mom.setBreed(new Breed("Нидерландский карликовый баран (NHD)"));
-        mom.setBreeder(breederService.getByKennelName("Терем-теремок"));
+        mom.setBreeder(breederService.findByKennelName("Терем-теремок"));
         mom.setColor(new Color("Коричневый мардер"));
         mom.setFather(null);
         mom.setGender(Gender.female);
@@ -82,7 +88,7 @@ public class AppReadyListner {
         Pet dad = new Pet();
         dad.setBirthday("16.06.2012");
         dad.setBreed(new Breed("Нидерландский карликовый баран (NHD)"));
-        dad.setBreeder(breederService.getByKennelName("Терем-теремок"));
+        dad.setBreeder(breederService.findByKennelName("Терем-теремок"));
         dad.setColor(new Color("Сиамская желтая"));
         dad.setFather(null);
         dad.setGender(Gender.male);
@@ -97,7 +103,7 @@ public class AppReadyListner {
         Pet pet = new Pet();
         pet.setBirthday("23.02.2014");
         pet.setBreed(new Breed("Нидерландский карликовый баран (NHD)"));
-        pet.setBreeder(breederService.getByKennelName("Терем-теремок"));
+        pet.setBreeder(breederService.findByKennelName("Терем-теремок"));
         pet.setColor(new Color("Сиамская коричневая"));
         pet.setFather(dad);
         pet.setGender(Gender.female);
@@ -114,7 +120,15 @@ public class AppReadyListner {
 //        petService.updatePet(pet);
 
 //        Color color = colorRepository.findById(3l).get();
-//        color.setColor("Коричневый мардер");
+//        color.setColorName("Коричневый мардер");
 //        colorRepository.save(color);
+//        try {
+//            File file = new File("myNewDir");
+//            file.mkdir();
+//            System.out.println(file.exists());
+//            System.out.println(file.getAbsolutePath());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
