@@ -1,0 +1,150 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments :: basicDependencies"></div>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+          integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous"/>
+    <link href="/css/datepicker.css" rel="stylesheet">
+    <script src="/js/datepicker.js"></script>
+    <script src="/js/selectize/selectize.js"></script>
+</head>
+<body>
+
+<div th:replace="fragments :: navbar"></div>
+
+<div class="container">
+    <form method="post" class="needs-validation" th:action="@{/save}" enctype="multipart/form-data" validate>
+        <input type="hidden" name="petId" th:value="${pet.getId()}">
+
+        <label for="pedigreeId">ID родословной</label>
+        <input type="text" class="form-control" id="pedigreeId" name="pedigreeId" th:value="${pet.getPedigreeId()}">
+
+        <label for="petName">Имя питомца</label>
+        <input type="text" class="form-control" id="petName" name="petName" th:value="${pet.getName()}" required>
+
+        <label for="birthDate">Дата рождения</label>
+        <input type="text" class="form-control datepicker-here" id="birthDate" name="birthDate"
+               th:value="${parameters.getBirthday()}"
+               required>
+
+        <label for="speciesId">Вид питомца</label>
+        <select id="speciesId" name="speciesId" class="form-control form-control-sm" required>
+            <option value="">Выбирите вид...</option>
+            <option th:each="optVal: ${parameters.getSpecies()}"
+                    th:text="${optVal.getSpeciesName()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getSpecies() == null} ? false : ${pet.getSpecies().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#speciesId').selectize();
+        </script>
+
+        <label for="female">Пол питомца</label>
+        <div class="col-md-4 mb-3 form-check">
+            <input type="radio" class="form-check-input" name="gender" id="female" value="female"
+                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender().name() == 'female'}" required>
+            <label class="form-check-label" for="female">Самка</label>
+        </div>
+        <div class="col-md-4 mb-3 form-check">
+            <input type="radio" class="form-check-input" name="gender" id="male" value="male"
+                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender().name() == 'male'}" required>
+            <label class="form-check-label" for="male">Самец</label>
+        </div>
+        <div class="card">
+            <div class="card-img" th:if="${pet.getImagePath() != null}">
+                <img th:src="'/petImage/' + ${pet.getId()}">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Фото питомца</h5>
+                <div class="input-group" id="photoSelect">
+
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="petPhotoFile" name="photo"
+                               aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="petPhotoFile">Выбрать файл</label>
+                    </div>
+                </div>
+                <div th:if="${pet.getImagePath() != null}">
+                    <button type="submit" class="btn btn-danger mt-2" th:formaction="@{'/delete_image/' + ${pet.getId()}}">
+                        Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+        <label for="metric">Метрика</label>
+        <input type="text" class="form-control" id="metric" name="metric" th:value="${pet.getMetricId()}">
+
+        <label for="breedName">Порода питомца</label>
+        <select id="breedName" name="breedId" class="form-control form-control-sm" required>
+            <option value="" selected>Выбирете породу...</option>
+            <option th:each="optVal: ${parameters.getBreeds()}"
+                    th:text="${optVal.getBreedName()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getBreed() == null} ? false : ${pet.getBreed().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#breedName').selectize();
+        </script>
+
+        <label for="colorName">Окрас питомца</label>
+        <select id="colorName" name="colorId" class="form-control form-control-sm" required>
+            <option value="" selected>Вибирете окрас...</option>
+            <option th:each="optVal: ${parameters.getColors()}"
+                    th:text="${optVal.getColorName()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getColor() == null} ? false : ${pet.getColor().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#colorName').selectize();
+        </script>
+
+        <label for="breederId">Заводчик</label>
+        <select id="breederId" name="breederId" class="form-control form-control-sm" required>
+            <option value="" selected>Выберите заводчика...</option>
+            <option th:each="optVal: ${parameters.getBreeders()}"
+                    th:text="${optVal.getKennelName()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getBreeder() == null} ? false : ${pet.getBreeder().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#breederId').selectize();
+        </script>
+
+        <label for="fatherId">Отец</label>
+        <select id="fatherId" name="fatherId" class="form-control form-control-sm">
+            <option value="" selected>Выбирите отца...</option>
+            <option th:each="optVal: ${parameters.getMales()}"
+                    th:text="${optVal.getName() + ' | ' + optVal.getBreeder().getKennelName() + ' | ' + optVal.getBirthday().toString()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getFather() == null} ? false : ${pet.getFather().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#fatherId').selectize({
+                allowEmptyOption: true,
+            });
+        </script>
+        <label for="mother">Мать</label>
+        <select id="mother" name="motherId" class="form-control form-control-sm">
+            <option value="" selected>Выбирите мать...</option>
+            <option th:each="optVal: ${parameters.getFemales()}"
+                    th:text="${optVal.getName() + ' | ' + optVal.getBreeder().getKennelName() + ' | ' + optVal.getBirthday()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getMother() == null} ? false : ${pet.getMother().getId() == optVal.getId()}"></option>
+        </select>
+        <script>
+            $('#mother').selectize({
+                allowEmptyOption: true,
+            });
+
+        </script>
+        <button class="btn btn-success mt-2" type="submit">Сохранить</button>
+    </form>
+</div>
+<script>
+    $('#petPhotoFile').on('change',function(){
+        var fileName = document.getElementById("petPhotoFile").files[0].name;
+        $(this).next('.custom-file-label').html(fileName);
+    })
+</script>
+</body>
+</html>

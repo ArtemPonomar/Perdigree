@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface BreedRepository extends CrudRepository<Breed,Long> {
     List<Breed> findByBreedNameIgnoreCase(String breedName);
-    List<Breed> findAll();
+    List<Breed> findByOrderByBreedNameAsc();
 }

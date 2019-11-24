@@ -1,62 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta content="text/html" charset="UTF-8"/>
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-93b8{font-family:"Lucida Console", Monaco, monospace !important;;border-color:inherit;text-align:left}
+.tg .tg-uys7{border-color:inherit;text-align:center}
+.tg .tg-xldj{border-color:inherit;text-align:left}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">БР</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="pedigree">Родословная <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Добавить
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="add_pet">Питомца</a>
-                    <a class="dropdown-item" href="add_breeder">Заводчика</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="add_species">Вид</a>
-                    <a class="dropdown-item" href="add_color">Окрас</a>
-                    <a class="dropdown-item" href="add_breed">Породу</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Мои питомцы</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Мои заявки</a>
-            </li>
-        </ul>
-    </div>
-    <form class="form-inline">
-        <button class="btn btn-sm btn-outline-secondary mx-1" type="button">Регистрация</button>
-        <button class="btn btn-sm btn-outline-primary mx-1" type="button">Вход</button>
-        <button class="btn btn-sm btn-outline-warning mx-1" type="button">Выход</button>
-
-    </form>
-</nav>
-<div class="container d-flex align-self-center">
-    <form>
-        <div class="form-group">
-            <label class="mt-1" for="pedigreeId">Номер родословной</label>
-            <input type="text" class="form-control" id="pedigreeId" name="pedigreeId">
-            <button class="btn btn-primary mt-2" type="submit">Получить</button>
-        </div>
-    </form>
-</div>
+<table class="tg" style="undefined;table-layout: fixed; width: 1256px; height: 1767px">
+    <colgroup>
+        <col style="width: 320px">
+        <col style="width: 240px">
+        <col style="width: 220px">
+        <col style="width: 600px">
+        <col style="width: 520px">
+        <col style="width: 600px">
+    </colgroup>
+    <tr>
+        <th class="tg-uys7" colspan="6">Родословная питомца № $$IDпитомца$$</th>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="7" border="0px">$$emblem$$</td>
+        <td class="tg-uys7" colspan="2" rowspan="7" border="0px"><br>Украинский Молодежный Центр<br>"Кролик и
+            компания"<br>www.krolikikompania.com.ua<br>krolik-ko@ukr.net<br>(044) 223-64-86, +380933116963<br><br><br>Секция
+            кролиководства<br>"Забавные кролики"<br>питомник<br>"Терем-теремок"
+        </td>
+        <td class="tg-93b8">Кличка: $$name$$</td>
+        <td class="tg-xldj">Пол: $$gender$$</td>
+        <td class="tg-uys7">Метрика: $$metric$$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: $$$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="2">Порода: $$breed$$</td>
+        <td class="tg-uys7" rowspan="6">$$foto$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="2">Окрас: $$color$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="2">Дата рождения: $$bday$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="2">Заводчик: $$breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">e-mail: $$email$$</td>
+        <td class="tg-xldj">Сайт: $$site$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">Адрес: $$address$$</td>
+        <td class="tg-xldj">тел: $$mobilePhone$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="5">$$m11foto$$</td>
+        <td class="tg-xldj" colspan="2" rowspan="5">1.0 - $$m11name$$<br><span
+                style="font-weight:bold">Порода:</span><br>$$m11breed$$<br><span
+                style="font-weight:bold">Окрас:</span><br>$$m11color$$<br><span
+                style="font-weight:bold">Дата рождения:</span><br>$$m11bday$$<br></td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m21name$$ <br>$$m21breed$$<br>$$m21color$$<br>$$m21bday$$<br>$$m21breeder$$<br>
+        </td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m31name$$ <br>$$m31breed$$, $$m31color$$<br>$$m31bday$$<br>$$m31breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m41name$$, $$m41breed$$, <br>$$m41color$$,$$m41bday$$, $$m41breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f41name$$, $$f41breed$$, <br>$$f41color$$,$$f41bday$$, $$f41breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="2">$$m21foto$$</td>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f31name$$ <br>$$f31breed$$, $$f31color$$<br>$$f31bday$$<br>$$f31breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m42name$$, $$m42breed$$, <br>$$m42color$$,$$m42bday$$, $$m42breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f42name$$, $$f42breed$$, <br>$$f42color$$,$$f42bday$$, $$f42breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f21name$$ <br>$$f21breed$$<br>$$f21color$$<br>$$f21bday$$<br>$$f21breeder$$
+        </td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m32name$$ <br>$$m32breed$$, $$m32color$$<br>$$m32bday$$<br>$$m32breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m43name$$, $$m43breed$$, <br>$$m43color$$,$$m43bday$$, $$m43breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="3" rowspan="3"><span style="font-weight:bold">Заводчик:</span><br>$$m11breeder$$
+        </td>
+        <td class="tg-xldj">0.1 - $$f43name$$, $$f43breed$$, <br>$$f43color$$,$$f43bday$$, $$f43breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="2">$$f21foto$$</td>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f32name$$ <br>$$f32breed$$, $$f32color$$<br>$$f32bday$$<br>$$f32breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m44name$$, $$m44breed$$, <br>$$m44color$$,$$m44bday$$, $$m44breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f44name$$, $$f44breed$$, <br>$$f44color$$,$$f44bday$$, $$f44breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="5">$$f11foto$$</td>
+        <td class="tg-xldj" colspan="2" rowspan="5">0.1 - $$f11name$$<br><span
+                style="font-weight:bold">Порода:</span><br>$$f11breed$$<br><span
+                style="font-weight:bold">Окрас:</span><br>$$f11color$$<br><span
+                style="font-weight:bold">Дата рождения:</span><br>$$f11bday$$
+        </td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m22name$$ <br>$$m22breed$$<br>$$m22color$$<br>$$m22bday$$<br>$$m22breeder$$
+        </td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m33name$$ <br>$$m33breed$$, $$m33color$$<br>$$m33bday$$<br>$$m33breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m45name$$, $$m45breed$$, <br>$$m45color$$,$$m45bday$$, $$m45breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f45name$$, $$f45breed$$, <br>$$f45color$$,$$f45bday$$, $$f45breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="2">$$m21foto$$</td>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f33name$$ <br>$$f33breed$$, $$f33color$$<br>$$f33bday$$<br>$$f33breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m46name$$, $$m46breed$$, <br>$$m46color$$,$$m46bday$$, $$m46breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f46name$$, $$f46breed$$, <br>$$f46color$$,$$f46bday$$, $$f46breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f22name$$ <br>$$f22breed$$<br>$$f22color$$<br>$$f22bday$$<br>$$f22breeder$$
+        </td>
+        <td class="tg-xldj" rowspan="2">1.0 - $$m34name$$ <br>$$m34breed$$, $$m34color$$<br>$$m34bday$$<br>$$m34breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m47name$$, $$m47breed$$, <br>$$m47color$$,$$m47bday$$, $$m47breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" colspan="3" rowspan="3"><span style="font-weight:bold">Заводчик:</span><br>$$f11breeder$$
+        </td>
+        <td class="tg-xldj">0.1 - $$f47name$$, $$f47breed$$, <br>$$f47color$$,$$f47bday$$, $$f47breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" rowspan="2">$$f22foto$$</td>
+        <td class="tg-xldj" rowspan="2">0.1 - $$f34name$$ <br>$$f34breed$$, $$f34color$$<br>$$f34bday$$<br>$$f34breeder$$
+        </td>
+        <td class="tg-xldj">1.0 - $$m48name$$, $$m48breed$$, <br>$$m48color$$,$$m48bday$$, $$m48breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj">0.1 - $$f48name$$, $$f48breed$$, <br>$$f48color$$,$$f48bday$$, $$f48breeder$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" colspan="4">Дата выдачи: $$issueDate$$</td>
+        <td class="tg-xldj" colspan="2">Подпись:</td>
+    </tr>
+    <tr>
+        <td class="tg-0pky" colspan="6">За дефекты и изменения, появившиеся после продажи питомца, заводчик
+            ответственности не несет.
+        </td>
+    </tr>
+</table>
 </body>
-</html>

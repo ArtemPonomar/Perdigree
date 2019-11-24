@@ -14,7 +14,7 @@ public class BreedService {
     private BreedRepository breedRepository;
 
     public List<Breed> getBreeders() {
-        return breedRepository.findAll();
+        return breedRepository.findByOrderByBreedNameAsc();
     }
 
     public Breed getByBreedName(String breedName) {

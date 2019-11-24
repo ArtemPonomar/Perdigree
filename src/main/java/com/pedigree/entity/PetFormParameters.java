@@ -14,6 +14,15 @@ public class PetFormParameters {
     List<Pet> males;
     List<Pet> females;
     List<Breeder> breeders;
+    String birthday;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 
     public List<Species> getSpecies() {
         return species;

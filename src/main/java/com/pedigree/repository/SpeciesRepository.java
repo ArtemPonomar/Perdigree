@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface SpeciesRepository extends CrudRepository<Species,Long> {
     List<Species> findBySpeciesNameIgnoreCase(String speciesName);
-    List<Species> findAll();
+    List<Species> findByOrderBySpeciesNameAsc();
 }

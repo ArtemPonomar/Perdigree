@@ -5,6 +5,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -32,7 +33,8 @@ public class Pet {
     @Column(columnDefinition = "smallint")
     private Gender gender;
 
-    private String birthday;
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
@@ -98,11 +100,11 @@ public class Pet {
         this.gender = gender;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

@@ -14,14 +14,14 @@ public class ColorService {
     private ColorRepository colorRepository;
 
     public Color getByColorName(String colorName) {
-        List<Color> searchResult = colorRepository.findByColorNameIgnoreCase(colorName);
+        List<Color> searchResult = colorRepository.findByColorNameIgnoreCaseOrderByColorNameAsc(colorName);
         if (searchResult.size() == 0) return null;
         return searchResult.get(0);
     }
 
     @Transactional
     public void saveColor(Color color){
-        List<Color> dups = colorRepository.findByColorNameIgnoreCase(color.getColorName());
+        List<Color> dups = colorRepository.findByColorNameIgnoreCaseOrderByColorNameAsc(color.getColorName());
         if (dups.size() != 0) {
             color.setId(dups.get(0).getId());
         }

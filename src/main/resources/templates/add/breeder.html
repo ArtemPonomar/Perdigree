@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: basicDependencies">
+</head>
+<body>
+
+<div th:replace="fragments :: navbar"></div>
+
+<div class="container">
+    <form method="post" action="add_breeder" class="needs-validation" validate>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="breeder_name">Имя заводчика</label>
+                <input type="text" class="form-control" id="breeder_name" name="breederName" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="kennel_name">Название питомника </label>
+                <input type="text" class="form-control" id="kennel_name" name="kennelName" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="breeder_email">Почта заводчика</label>
+                <input type="email" class="form-control" id="breeder_email" name="breederEmail" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="breeder_number">Телефон заводчика</label>
+                <input type="tel" class="form-control" id="breeder_number" name="breederNumber" required>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="breeder_site_address">Сайт питомника</label>
+                <input type="url" class="form-control" id="breeder_site_address" name="breederSite" placeholder="http://...">
+                <div class="invalid-feedback">
+                    Введите адрес сайта, начиная с http://, или оставьте поле пустым
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-2" type="submit">Сохранить</button>
+    </form>
+</div>
+<script>
+// JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and formEvent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+</body>
+</html>

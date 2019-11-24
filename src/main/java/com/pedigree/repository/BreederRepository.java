@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface BreederRepository extends CrudRepository<Breeder, Long> {
     List<Breeder> findByKennelNameIgnoreCase(String kennelName);
-    List<Breeder> findAll();
+    List<Breeder> findByOrderByBreederNameAsc();
 }

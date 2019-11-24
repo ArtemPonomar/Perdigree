@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments :: basicDependencies">
+</head>
+<body>
+<div th:replace="fragments :: navbar"></div>
+<div class="container d-flex align-self-center">
+    <form method="post" action="add_breed">
+        <div class="form-group">
+            <label class="mt-1" for="breedName">Название породы</label>
+            <input type="text" class="form-control" id="breedName" name="breedName">
+            <button class="btn btn-primary mt-2" type="submit">Сохранить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
