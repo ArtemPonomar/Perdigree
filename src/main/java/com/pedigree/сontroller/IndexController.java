@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
     @GetMapping(value = "/")
     public ModelAndView index(Model model){
-        return new ModelAndView("redirect:/pedigree");
+        return new ModelAndView("redirect:/my_pets");
     }
 
     @GetMapping(value = "/add/test")

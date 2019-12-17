@@ -1,6 +1,5 @@
 package com.pedigree.сontroller;
 
-import com.pedigree.entity.PetFormParameters;
 import com.pedigree.entity.pet_related.Pet;
 import com.pedigree.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;

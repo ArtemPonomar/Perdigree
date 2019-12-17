@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,6 +42,19 @@ public class ImageService {
         } else {
             throw new IllegalArgumentException("Фото не было сохранено");
         }
+    }
+
+    public String formatImageToFitBorders(int borderWidth, int borderHeight, String imagePath){
+        try {
+            BufferedImage bimg = ImageIO.read(new File(imagePath));
+            int width = bimg.getWidth();
+            int height = bimg.getHeight();
+
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public void deleteImage(String path) {

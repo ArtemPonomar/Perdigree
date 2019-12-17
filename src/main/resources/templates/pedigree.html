@@ -1,3 +1,4 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta content="text/html" charset="UTF-8"/>
     <style type="text/css">
@@ -8,10 +9,12 @@
 .tg .tg-uys7{border-color:inherit;text-align:center}
 .tg .tg-xldj{border-color:inherit;text-align:left}
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+
+
     </style>
 </head>
 <body>
-<table class="tg" style="undefined;table-layout: fixed; width: 1256px; height: 1767px">
+<table class="tg" style="table-layout: fixed; width: 1256px; height: 1767px">
     <colgroup>
         <col style="width: 320px">
         <col style="width: 240px">
@@ -21,7 +24,7 @@
         <col style="width: 600px">
     </colgroup>
     <tr>
-        <th class="tg-uys7" colspan="6">Родословная питомца № $$IDпитомца$$</th>
+        <th class="tg-uys7" colspan="6" th:text="'Родословная питомца №' + ${pet.getPedigreeId()}"></th>
     </tr>
     <tr>
         <td class="tg-uys7" rowspan="7" border="0px">$$emblem$$</td>
@@ -29,13 +32,16 @@
             компания"<br>www.krolikikompania.com.ua<br>krolik-ko@ukr.net<br>(044) 223-64-86, +380933116963<br><br><br>Секция
             кролиководства<br>"Забавные кролики"<br>питомник<br>"Терем-теремок"
         </td>
-        <td class="tg-93b8">Кличка: $$name$$</td>
-        <td class="tg-xldj">Пол: $$gender$$</td>
-        <td class="tg-uys7">Метрика: $$metric$$&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: $$$$</td>
+        <td class="tg-93b8" th:text="'Кличка: ' + ${pet.getName()}"></td>
+        <td class="tg-xldj" th:text="'Пол: ' + ${pet.getGender().name()}"></td>
+        <td class="tg-uys7"
+            th:text="'Метрика: ' + ${pet.getMetricId()} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: ' + ${pet.getPedigreeId()}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="2">Порода: $$breed$$</td>
-        <td class="tg-uys7" rowspan="6">$$foto$$</td>
+        <td class="tg-xldj" colspan="2" th:text="'Порода: ' + ${pet.breed.getBreedName()}"></td>
+        <td class="tg-uys7" rowspan="6">
+            <img style="position:absolute; TOP:123px; LEFT:1908px; WIDTH:600px; HEIGHT:347px; " th:src="'/petImage/' + ${pet.getId()}">
+        </td>
     </tr>
     <tr>
         <td class="tg-xldj" colspan="2">Окрас: $$color$$</td>

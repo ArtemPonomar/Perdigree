@@ -17,7 +17,7 @@ public class PedigreeController {
     public String getPedigree(
             @RequestParam(required = false) Long petId,
             Model model){
-        System.out.println(petService.findById(petId));
+        model.addAttribute("pet", petService.findById(petId));
         return "pedigree";
     }
 }

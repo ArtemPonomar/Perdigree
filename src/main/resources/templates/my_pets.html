@@ -26,9 +26,9 @@
             <p class="card-text" th:if="${pet.getColor() != null}" th:text="'Окрас ' + ${pet.getColor().getColorName()}"></p>
         </div>
         <div class=" card-body text-right">
-            <form th:action="@{'/pedigree'}" method="get" style="display:inline-block;">
+            <form th:action="@{/pedigree}" method="get" style="display:inline-block;">
                 <input type="hidden" name="petId" th:value="${pet.getId()}">
-                <button type="button" class="btn btn-info">Родословная</button>
+                <button type="submit" class="btn btn-info">Родословная</button>
             </form>
             <form th:action="@{'/edit_pet/' + ${pet.getId()}}" method="get" style="display:inline-block;">
                 <button type="submit" class="btn btn-warning">Редактировать</button>
