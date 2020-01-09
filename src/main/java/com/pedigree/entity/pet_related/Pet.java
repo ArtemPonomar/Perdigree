@@ -5,6 +5,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -102,6 +103,10 @@ public class Pet {
 
     public Date getBirthday() {
         return birthday;
+    }
+
+    public String getBirthdayString(){
+        return new SimpleDateFormat("dd.MM.yyyy").format(birthday);
     }
 
     public void setBirthday(Date birthday) {

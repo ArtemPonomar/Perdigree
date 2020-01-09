@@ -20,6 +20,8 @@ public class Breeder {
 
     private String siteAddress;
 
+    private String breederAddress;
+
     public Long getId() {
         return id;
     }
@@ -64,6 +66,14 @@ public class Breeder {
 
     public void setSiteAddress(String siteAddress) {
         this.siteAddress = siteAddress;
+    }
+
+    public String getBreederAddress() {
+        return breederAddress;
+    }
+
+    public void setBreederAddress(String breederAddress) {
+        this.breederAddress = breederAddress;
     }
 
     @Override

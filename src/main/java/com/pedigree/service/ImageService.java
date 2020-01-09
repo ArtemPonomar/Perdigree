@@ -44,18 +44,18 @@ public class ImageService {
         }
     }
 
-    public String formatImageToFitBorders(int borderWidth, int borderHeight, String imagePath){
-        try {
-            BufferedImage bimg = ImageIO.read(new File(imagePath));
-            int width = bimg.getWidth();
-            int height = bimg.getHeight();
-
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
+//    public String formatImageToFitBorders(int borderWidth, int borderHeight, String imagePath){
+//        try {
+//            BufferedImage bimg = ImageIO.read(new File(imagePath));
+//            int width = bimg.getWidth();
+//            int height = bimg.getHeight();
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 
     public void deleteImage(String path) {
         File file = new File(path);

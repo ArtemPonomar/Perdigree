@@ -16,23 +16,25 @@ public class AddBreederController {
     private BreederService breederService;
 
     @GetMapping(value = "/add/breeder")
-    public String addBreeder(Model model){
+    public String addBreeder(Model model) {
         return "add/breeder";
     }
 
     @PostMapping(value = "/add/breeder")
     public ModelAndView saveBreeder(@RequestParam String breederName,
-                              @RequestParam String breederEmail,
-                              @RequestParam String kennelName,
-                              @RequestParam String breederNumber,
-                              @RequestParam(required = false) String breederSite,
-                              Model model){
+                                    @RequestParam String breederEmail,
+                                    @RequestParam String kennelName,
+                                    @RequestParam String breederNumber,
+                                    @RequestParam(required = false) String breederSite,
+                                    @RequestParam String breederAddress,
+                                    Model model) {
         Breeder breeder = new Breeder();
         breeder.setBreederName(breederName);
         breeder.setEmail(breederEmail);
         breeder.setKennelName(kennelName);
         breeder.setPhoneNumber(breederNumber);
-        if(!breederSite.isEmpty())breeder.setSiteAddress(breederSite);
+        breeder.setBreederAddress(breederAddress);
+        if (!breederSite.isEmpty()) breeder.setSiteAddress(breederSite);
         breederService.save(breeder);
         return new ModelAndView("redirect:/add/breeder");
     }

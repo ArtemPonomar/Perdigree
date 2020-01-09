@@ -24,7 +24,7 @@
         <col style="width: 600px">
     </colgroup>
     <tr>
-        <th class="tg-uys7" colspan="6" th:text="'Родословная питомца №' + ${pet.getPedigreeId()}"></th>
+        <th class="tg-uys7" colspan="6" th:text="'Родословная питомца № ' + ${pet.getPedigreeId()}"></th>
     </tr>
     <tr>
         <td class="tg-uys7" rowspan="7" border="0px">$$emblem$$</td>
@@ -32,7 +32,7 @@
             компания"<br>www.krolikikompania.com.ua<br>krolik-ko@ukr.net<br>(044) 223-64-86, +380933116963<br><br><br>Секция
             кролиководства<br>"Забавные кролики"<br>питомник<br>"Терем-теремок"
         </td>
-        <td class="tg-93b8" th:text="'Кличка: ' + ${pet.getName()}"></td>
+        <td class="tg-93b8" th:text="'Кличка: ' + ${pet.getName()} + ' из ' + ${pet.breeder.kennelName}"></td>
         <td class="tg-xldj" th:text="'Пол: ' + ${pet.getGender().name()}"></td>
         <td class="tg-uys7"
             th:text="'Метрика: ' + ${pet.getMetricId()} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: ' + ${pet.getPedigreeId()}"></td>
@@ -40,32 +40,40 @@
     <tr>
         <td class="tg-xldj" colspan="2" th:text="'Порода: ' + ${pet.breed.getBreedName()}"></td>
         <td class="tg-uys7" rowspan="6">
-            <img style="position:absolute; TOP:123px; LEFT:1908px; WIDTH:600px; HEIGHT:347px; " th:src="'/petImage/' + ${pet.getId()}">
+            <img th:src="'/petImage/' + ${pet.getId()}">
+<!--            <img style="position:absolute; TOP:123px; LEFT:1908px; WIDTH:600px; HEIGHT:347px; " th:src="'/petImage/' + ${pet.getId()}">-->
         </td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="2">Окрас: $$color$$</td>
+        <td class="tg-xldj" colspan="2" th:text="'Окрас: ' + ${pet.color.colorName}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="2">Дата рождения: $$bday$$</td>
+        <td class="tg-xldj" colspan="2" th:text="'Дата рождения: ' + ${pet.getBirthdayString()}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="2">Заводчик: $$breeder$$</td>
+        <td class="tg-xldj" colspan="2" th:text="'Заводчик: ' + ${pet.breeder.breederName}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj">e-mail: $$email$$</td>
-        <td class="tg-xldj">Сайт: $$site$$</td>
+        <td class="tg-xldj" th:text="'e-mail: ' + ${pet.breeder.email}"></td>
+        <td class="tg-xldj" th:text="'Сайт: ' + ${pet.breeder.siteAddress}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj">Адрес: $$address$$</td>
-        <td class="tg-xldj">тел: $$mobilePhone$$</td>
+        <td class="tg-xldj" th:text="'Адрес: ' + ${pet.breeder.breederAddress}"></td>
+        <td class="tg-xldj" th:text="'Номер телефона: ' + ${pet.breeder.phoneNumber}"></td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="5">$$m11foto$$</td>
-        <td class="tg-xldj" colspan="2" rowspan="5">1.0 - $$m11name$$<br><span
-                style="font-weight:bold">Порода:</span><br>$$m11breed$$<br><span
-                style="font-weight:bold">Окрас:</span><br>$$m11color$$<br><span
-                style="font-weight:bold">Дата рождения:</span><br>$$m11bday$$<br></td>
+        <td class="tg-uys7" rowspan="5" >
+            <img th:src="'/petImage/' + ${pet.getFather().getId()}">
+        </td>
+        <div>
+        <td class="tg-xldj" colspan="2" rowspan="5" th:utext="' <b>Мать</b> <br><br>' + ${pet.mother.name} ' из ' + ${pet.mother.breeder.kennelName} + '<br><span
+                style=font-weight:bold>Порода:</span><br>$$m11breed$$<br><span
+                style=font-weight:bold>Окрас:</span><br>$$m11color$$<br><span
+                style=font-weight:bold>Дата рождения:</span><br>$$m11bday$$<br>'">1.0 - $$m11name$$<br><span
+                style=font-weight:bold>Порода:</span><br>$$m11breed$$<br><span
+                style=font-weight:bold>Окрас:</span><br>$$m11color$$<br><span
+                style=font-weight:bold>Дата рождения:</span><br>$$m11bday$$<br></td>
+        </div>
         <td class="tg-xldj" rowspan="2">1.0 - $$m21name$$ <br>$$m21breed$$<br>$$m21color$$<br>$$m21bday$$<br>$$m21breeder$$<br>
         </td>
         <td class="tg-xldj" rowspan="2">1.0 - $$m31name$$ <br>$$m31breed$$, $$m31color$$<br>$$m31bday$$<br>$$m31breeder$$
