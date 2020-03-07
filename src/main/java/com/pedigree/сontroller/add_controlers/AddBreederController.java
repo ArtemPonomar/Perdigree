@@ -36,6 +36,6 @@ public class AddBreederController {
         breeder.setBreederAddress(breederAddress);
         if (!breederSite.isEmpty()) breeder.setSiteAddress(breederSite);
         breederService.save(breeder);
-        return new ModelAndView("redirect:/add/breeder");
+        return new ModelAndView("redirect:/my_pets");
     }
 }

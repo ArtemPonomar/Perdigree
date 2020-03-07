@@ -41,13 +41,13 @@
 
         <label for="female">Пол питомца</label>
         <div class="col-md-4 mb-3 form-check">
-            <input type="radio" class="form-check-input" name="gender" id="female" value="female"
-                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender().name() == 'female'}" required>
+            <input type="radio" class="form-check-input" name="gender" id="female" value="female 0,1"
+                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender() == 'female 0,1'}" required>
             <label class="form-check-label" for="female">Самка</label>
         </div>
         <div class="col-md-4 mb-3 form-check">
-            <input type="radio" class="form-check-input" name="gender" id="male" value="male"
-                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender().name() == 'male'}" required>
+            <input type="radio" class="form-check-input" name="gender" id="male" value="male 1,0"
+                   th:checked="${pet.getGender() == null} ? false : ${pet.getGender() == 'male 1,0'}" required>
             <label class="form-check-label" for="male">Самец</label>
         </div>
         <div class="card">
@@ -109,6 +109,15 @@
         <script>
             $('#breederId').selectize();
         </script>
+
+        <label for="furTypeName">Тип шерсти</label>
+        <select id="furTypeName" name="furTypeId" class="form-control form-control-sm">
+            <option value="" selected>Выбирете вид шерсти...</option>
+            <option th:each="optVal: ${parameters.getFurTypes()}"
+                    th:text="${optVal.getFurTypeName()}"
+                    th:value="${optVal.getId()}"
+                    th:selected="${pet.getFurType() == null} ? false : ${pet.getFurType().getId() == optVal.getId()}"></option>
+        </select>
 
         <label for="fatherId">Отец</label>
         <select id="fatherId" name="fatherId" class="form-control form-control-sm">

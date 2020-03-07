@@ -1,8 +1,8 @@
 package com.pedigree.service;
 
+import com.pedigree.entity.Breeder;
 import com.pedigree.entity.PetFormParameters;
-import com.pedigree.entity.pet_related.Gender;
-import com.pedigree.entity.pet_related.Pet;
+import com.pedigree.entity.pet_related.*;
 import com.pedigree.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +36,11 @@ public class PetService {
     @Autowired
     private SpeciesRepository speciesRepository;
 
+    @Autowired
+    private FurTypeRepository furTypeRepository;
+
     @Transactional
-    public String savePetFromParameters(Long petId, String pedigreeId, String petName, String birthDate, Long speciesId, String gender, MultipartFile photo, String metric, Long breedId, Long colorId, Long breederId, Long fatherId, Long motherId) throws IllegalArgumentException, ParseException {
+    public String savePetFromParameters(Long petId, String pedigreeId, String petName, String birthDate, Long speciesId, String gender, MultipartFile photo, String metric, Long breedId, Long furTypeId, Long colorId, Long breederId, Long fatherId, Long motherId) throws IllegalArgumentException, ParseException {
         Pet newPet = findById(petId);
         if (newPet == null) newPet = new Pet();
         newPet.setId(petId);
@@ -45,9 +48,10 @@ public class PetService {
         newPet.setName(petName);
         newPet.setBirthday(dateService.stringToDate(birthDate));
         newPet.setSpecies(speciesRepository.findById(speciesId).get());
-        newPet.setGender(Gender.valueOf(gender));
+        newPet.setGender(gender);
         newPet.setMetricId(metric);
         newPet.setBreed(breedRepository.findById(breedId).get());
+        newPet.setFurType(furTypeRepository.findById(furTypeId).get());
         newPet.setColor(colorRepository.findById(colorId).get());
         newPet.setBreeder(breederRepository.findById(breederId).get());
         newPet.setFather((fatherId == null) ? null : petRepository.findById(fatherId).get());
@@ -61,13 +65,13 @@ public class PetService {
     }
 
     private void validateParents(Pet pet) throws IllegalArgumentException {
-        if (pet.getFather() != null){
-            if (pet.getBirthday().before(pet.getFather().getBirthday())){
+        if (pet.getFather() != null) {
+            if (pet.getBirthday().before(pet.getFather().getBirthday())) {
                 throw new IllegalArgumentException("Отец не может быть моложе ребёнка");
             }
         }
-        if (pet.getMother() != null){
-            if (pet.getBirthday().before(pet.getMother().getBirthday())){
+        if (pet.getMother() != null) {
+            if (pet.getBirthday().before(pet.getMother().getBirthday())) {
                 throw new IllegalArgumentException("Отец не может быть моложе ребёнка");
             }
         }
@@ -77,10 +81,11 @@ public class PetService {
         PetFormParameters parameters = new PetFormParameters();
         parameters.setBreeders(breederRepository.findByOrderByBreederNameAsc());
         parameters.setBreeds(breedRepository.findByOrderByBreedNameAsc());
+        parameters.setFurTypes(furTypeRepository.findByOrderByFurTypeNameAsc());
         parameters.setColors(colorRepository.findByOrderByColorNameAsc());
         parameters.setSpecies(speciesRepository.findByOrderBySpeciesNameAsc());
-        parameters.setFemales(petRepository.findByGenderOrderByNameAsc(Gender.female));
-        parameters.setMales(petRepository.findByGenderOrderByNameAsc(Gender.male));
+        parameters.setFemales(petRepository.findByGenderOrderByNameAsc("female 0,1"));
+        parameters.setMales(petRepository.findByGenderOrderByNameAsc("male 1,0"));
         return parameters;
     }
 
@@ -89,8 +94,8 @@ public class PetService {
 
         Pet pet = findById(id);
 
-        petFormParameters.setFemales(petRepository.findByGenderAndSpeciesAndBirthdayLessThanOrderByNameAsc(Gender.female, pet.getSpecies(), pet.getBirthday()));
-        petFormParameters.setMales(petRepository.findByGenderAndSpeciesAndBirthdayLessThanOrderByNameAsc(Gender.male, pet.getSpecies(), pet.getBirthday()));
+        petFormParameters.setFemales(petRepository.findByGenderAndSpeciesAndBirthdayLessThanOrderByNameAsc(Pet.getFemaleGenderName(), pet.getSpecies(), pet.getBirthday()));
+        petFormParameters.setMales(petRepository.findByGenderAndSpeciesAndBirthdayLessThanOrderByNameAsc(Pet.getMaleGenderName(), pet.getSpecies(), pet.getBirthday()));
         petFormParameters.setBirthday(dateService.dateToString(pet.getBirthday()));
         return petFormParameters;
     }
@@ -146,6 +151,31 @@ public class PetService {
         if (path != null) imageService.deleteImage(path);
         pet.setImagePath(null);
         petRepository.save(pet);
+    }
+
+    public Pet preparePetForPedigree(Pet pet, int generations) {
+        if (generations == 0) return pet;
+        if (pet.getFather() == null) pet.setFather(createBlankPet());
+        if (pet.getMother() == null) pet.setMother(createBlankPet());
+
+        preparePetForPedigree(pet.getFather(), generations - 1);
+        preparePetForPedigree(pet.getMother(), generations - 1);
+
+        return pet;
+    }
+
+    private Pet createBlankPet() {
+        Breeder breeder = new Breeder();
+        breeder.setBreederName("???");
+        breeder.setKennelName("???");
+
+        Pet blank = new Pet();
+        blank.setName("???");
+        blank.setBreeder(breeder);
+        blank.setBreed(new Breed("???"));
+        blank.setColor(new Color("???"));
+        blank.setBirthday(null);
+        return blank;
     }
 }
 

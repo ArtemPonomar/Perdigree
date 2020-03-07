@@ -93,14 +93,14 @@
 <!--        <div class="invalid-feedback">-->
 <!--            Выберите вид питомца-->
 <!--        </div>-->
-<!--        <label for="female">Пол питомца</label>-->
+<!--        <label for="female01">Пол питомца</label>-->
 <!--        <div class="col-md-4 mb-3 form-check">-->
-<!--            <input type="radio" class="form-check-input" name="gender" id="female" value="female" required>-->
-<!--            <label class="form-check-label" for="female">Самка</label>-->
+<!--            <input type="radio" class="form-check-input" name="gender" id="female01" value="female01" required>-->
+<!--            <label class="form-check-label" for="female01">Самка</label>-->
 <!--        </div>-->
 <!--        <div class="col-md-4 mb-3 form-check">-->
-<!--            <input type="radio" class="form-check-input" name="gender" id="male" value="male" required>-->
-<!--            <label class="form-check-label" for="male">Самец</label>-->
+<!--            <input type="radio" class="form-check-input" name="gender" id="male10" value="male10" required>-->
+<!--            <label class="form-check-label" for="male10">Самец</label>-->
 <!--        </div>-->
 <!--        <label class="form-check-label" for="photoSelect">Фото питомца</label>-->
 <!--        <div class="input-group" id="photoSelect">-->
@@ -143,7 +143,7 @@
 <!--        <label for="breeder">Заводчик</label>-->
 <!--        <select id="breeder" name="breederId" class="form-control form-control-sm" required>-->
 <!--            <option value="" selected>Выберите заводчика...</option>-->
-<!--            <option th:each="optVal: ${parameters.getBreeders()}"-->
+<!--            <option th:each="optVal: ${parameters.getFurTypes()}"-->
 <!--                    th:text="${optVal.getKennelName()}"-->
 <!--                    th:value="${optVal.getId()}"></option>-->
 <!--        </select>-->

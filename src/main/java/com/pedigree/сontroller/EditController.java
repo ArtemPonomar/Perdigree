@@ -50,6 +50,7 @@ public class EditController {
             @RequestParam(required = false) MultipartFile photo,
             @RequestParam(required = false) String metric,
             @RequestParam(required = false) Long breedId,
+            @RequestParam(required = false) Long furTypeId,
             @RequestParam(required = false) Long colorId,
             @RequestParam(required = false) Long breederId,
             @RequestParam(required = false) Long fatherId,
@@ -57,7 +58,7 @@ public class EditController {
             Model model,
             RedirectAttributes redirectAttributes) {
         try {
-            String successMessage = petService.savePetFromParameters(petId, pedigreeId, petName, birthDate, speciesId, gender, photo, metric, breedId, colorId, breederId, fatherId, motherId);
+            String successMessage = petService.savePetFromParameters(petId, pedigreeId, petName, birthDate, speciesId, gender, photo, metric, breedId, furTypeId, colorId, breederId, fatherId, motherId);
             redirectAttributes.addFlashAttribute("successMessage", successMessage);
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());

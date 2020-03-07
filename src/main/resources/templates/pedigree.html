@@ -11,6 +11,8 @@
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
 
 
+
+
     </style>
 </head>
 <body>
@@ -33,15 +35,15 @@
             кролиководства<br>"Забавные кролики"<br>питомник<br>"Терем-теремок"
         </td>
         <td class="tg-93b8" th:text="'Кличка: ' + ${pet.getName()} + ' из ' + ${pet.breeder.kennelName}"></td>
-        <td class="tg-xldj" th:text="'Пол: ' + ${pet.getGender().name()}"></td>
+        <td class="tg-xldj" th:text="'Пол: ' + ${pet.getGender()}"></td>
         <td class="tg-uys7"
             th:text="'Метрика: ' + ${pet.getMetricId()} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: ' + ${pet.getPedigreeId()}"></td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="2" th:text="'Порода: ' + ${pet.breed.getBreedName()}"></td>
+        <td class="tg-xldj" colspan="2" th:text="'Порода: ' + ${pet.breed.getBreedName()} + ' ' + ${pet.getFurType().getFurTypeName()}"></td>
         <td class="tg-uys7" rowspan="6">
-            <img th:src="'/petImage/' + ${pet.getId()}">
-<!--            <img style="position:absolute; TOP:123px; LEFT:1908px; WIDTH:600px; HEIGHT:347px; " th:src="'/petImage/' + ${pet.getId()}">-->
+<!--            <img height="200"  th:src="${pet.getImageAsBase64()}">-->
+                        <img style="position:absolute; TOP:123px; LEFT:1948px; WIDTH:519px; HEIGHT:346px; " th:src="${pet.getImageAsBase64()}">
         </td>
     </tr>
     <tr>
@@ -62,105 +64,220 @@
         <td class="tg-xldj" th:text="'Номер телефона: ' + ${pet.breeder.phoneNumber}"></td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="5" >
-            <img th:src="'/petImage/' + ${pet.getFather().getId()}">
+        <td class="tg-uys7" rowspan="5">
+            <img width=300 height="200" th:src="${pet.getFather().getImageAsBase64()}">
         </td>
         <div>
-        <td class="tg-xldj" colspan="2" rowspan="5" th:utext="' <b>Мать</b> <br><br>' + ${pet.mother.name} ' из ' + ${pet.mother.breeder.kennelName} + '<br><span
-                style=font-weight:bold>Порода:</span><br>$$m11breed$$<br><span
-                style=font-weight:bold>Окрас:</span><br>$$m11color$$<br><span
-                style=font-weight:bold>Дата рождения:</span><br>$$m11bday$$<br>'">1.0 - $$m11name$$<br><span
-                style=font-weight:bold>Порода:</span><br>$$m11breed$$<br><span
-                style=font-weight:bold>Окрас:</span><br>$$m11color$$<br><span
-                style=font-weight:bold>Дата рождения:</span><br>$$m11bday$$<br></td>
+            <td class="tg-xldj" colspan="2" rowspan="5" th:utext="' <b>Отец</b><br>' + ${pet.father.name} + ' из ' + ${pet.father.breeder.kennelName} + '<br><br><span
+                style=font-weight:bold>Порода:</span><br>' + ${pet.father.breed.breedName} + ' ' + ${pet.father.getFurType().getFurTypeName()} + '<br><br><span
+                style=font-weight:bold>Окрас:</span><br>' + ${pet.father.color.colorName} + '<br><br><span
+                style=font-weight:bold>Дата рождения:</span><br>' + ${pet.father.getBirthdayString()} + '<br>'"></td>
         </div>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m21name$$ <br>$$m21breed$$<br>$$m21color$$<br>$$m21bday$$<br>$$m21breeder$$<br>
+        <td class="tg-xldj" rowspan="2" th:utext="'1.0 - <b>' + ${pet.father.father.name} + ' из ' + ${pet.father.father.breeder.kennelName} + '</b><br>' +
+             ${pet.father.father.breed.breedName} + ' ' + ${pet.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.color.colorName} + '<br>' +
+             ${pet.father.father.getBirthdayString()} + '<br>' +
+             ${pet.father.father.breeder.breederName}">$$m21name$$
         </td>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m31name$$ <br>$$m31breed$$, $$m31color$$<br>$$m31bday$$<br>$$m31breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'1.0 - <b>' + ${pet.father.father.father.name} + ' из ' + ${pet.father.father.father.breeder.kennelName} + '</b><br>' +
+             ${pet.father.father.father.breed.breedName} + ' ' + ${pet.father.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.father.color.colorName} + '<br>' +
+             ${pet.father.father.father.getBirthdayString()} + '<br>' +
+             ${pet.father.father.father.breeder.breederName}">$$m31name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m41name$$, $$m41breed$$, <br>$$m41color$$,$$m41bday$$, $$m41breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.father.father.father.father.name} + ' из ' + ${pet.father.father.father.father.breeder.kennelName} + '</b> ' +
+             ${pet.father.father.father.father.breed.breedName} + ' ' + ${pet.father.father.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.father.father.color.colorName} + ' ' +
+             ${pet.father.father.father.father.getBirthdayString()} + ' ' +
+             ${pet.father.father.father.father.breeder.breederName}">1.0 - $$m41name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj">0.1 - $$f41name$$, $$f41breed$$, <br>$$f41color$$,$$f41bday$$, $$f41breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.father.father.father.mother.name} + ' из ' + ${pet.father.father.father.mother.breeder.kennelName} + '</b> ' +
+             ${pet.father.father.father.mother.breed.breedName} + ' ' + ${pet.father.father.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.father.mother.color.colorName} + ' ' +
+             ${pet.father.father.father.mother.getBirthdayString()} + ' ' +
+             ${pet.father.father.father.mother.breeder.breederName}">0.1 - $$f41name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="2">$$m21foto$$</td>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f31name$$ <br>$$f31breed$$, $$f31color$$<br>$$f31bday$$<br>$$f31breeder$$
+        <td class="tg-uys7" rowspan="2"><img height="85"  th:src="${pet.father.father.getImageAsBase64()}"></td>
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.father.father.mother.name} + ' из ' + ${pet.father.father.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.father.father.mother.breed.breedName} + ' ' + ${pet.father.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.mother.color.colorName} + '<br>' +
+             ${pet.father.father.mother.getBirthdayString()} + '<br>' +
+             ${pet.father.father.mother.breeder.breederName}">$$f31name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m42name$$, $$m42breed$$, <br>$$m42color$$,$$m42bday$$, $$m42breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.father.father.mother.father.name} + ' из ' + ${pet.father.father.mother.father.breeder.kennelName} + '</b> ' +
+             ${pet.father.father.mother.father.breed.breedName} + ' ' + ${pet.father.father.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.mother.father.color.colorName} + ' ' +
+             ${pet.father.father.mother.father.getBirthdayString()} + ' ' +
+             ${pet.father.father.mother.father.breeder.breederName}">1.0 - $$m42name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj">0.1 - $$f42name$$, $$f42breed$$, <br>$$f42color$$,$$f42bday$$, $$f42breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.father.father.mother.mother.name} + ' из ' + ${pet.father.father.mother.mother.breeder.kennelName} + '</b> ' +
+             ${pet.father.father.mother.mother.breed.breedName} + ' ' + ${pet.father.father.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.father.mother.mother.color.colorName} + ' ' +
+             ${pet.father.father.mother.mother.getBirthdayString()} + ' ' +
+             ${pet.father.father.mother.mother.breeder.breederName}">0.1 - $$f42name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f21name$$ <br>$$f21breed$$<br>$$f21color$$<br>$$f21bday$$<br>$$f21breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.father.mother.name} + ' из ' + ${pet.father.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.father.mother.breed.breedName} + ' ' + ${pet.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.color.colorName} + '<br>' +
+             ${pet.father.mother.getBirthdayString()} + '<br>' +
+             ${pet.father.mother.breeder.breederName}">$$f21name$$
         </td>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m32name$$ <br>$$m32breed$$, $$m32color$$<br>$$m32bday$$<br>$$m32breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'1.0 - <b>' + ${pet.father.mother.father.name} + ' из ' + ${pet.father.mother.father.breeder.kennelName} + '</b><br>' +
+             ${pet.father.mother.father.breed.breedName} + ' ' + ${pet.father.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.father.color.colorName} + '<br>' +
+             ${pet.father.mother.father.getBirthdayString()} + '<br>' +
+             ${pet.father.mother.father.breeder.breederName}">$$m32name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m43name$$, $$m43breed$$, <br>$$m43color$$,$$m43bday$$, $$m43breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.father.mother.father.father.name} + ' из ' + ${pet.father.mother.father.father.breeder.kennelName} + '</b> ' +
+             ${pet.father.mother.father.father.breed.breedName} + ' ' + ${pet.father.mother.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.father.father.color.colorName} + ' ' +
+             ${pet.father.mother.father.father.getBirthdayString()} + ' ' +
+             ${pet.father.mother.father.father.breeder.breederName}">1.0 - $$m43name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj" colspan="3" rowspan="3"><span style="font-weight:bold">Заводчик:</span><br>$$m11breeder$$
+        <td class="tg-xldj" colspan="3" rowspan="3"><span th:utext="'<b>Заводчик: </b>' + ${pet.father.breeder.breederName}"></span>
         </td>
-        <td class="tg-xldj">0.1 - $$f43name$$, $$f43breed$$, <br>$$f43color$$,$$f43bday$$, $$f43breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.father.mother.father.mother.name} + ' из ' + ${pet.father.mother.father.mother.breeder.kennelName} + '</b> ' +
+             ${pet.father.mother.father.mother.breed.breedName} + ' ' + ${pet.father.mother.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.father.mother.color.colorName} + ' ' +
+             ${pet.father.mother.father.mother.getBirthdayString()} + ' ' +
+             ${pet.father.mother.father.mother.breeder.breederName}">0.1 - $$f43name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="2">$$f21foto$$</td>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f32name$$ <br>$$f32breed$$, $$f32color$$<br>$$f32bday$$<br>$$f32breeder$$
+        <td class="tg-uys7" rowspan="2"><img height="85"  th:src="${pet.father.mother.getImageAsBase64()}"></td>
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.father.mother.mother.name} + ' из ' + ${pet.father.mother.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.father.mother.mother.breed.breedName} + ' ' + ${pet.father.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.mother.color.colorName} + '<br>' +
+             ${pet.father.mother.mother.getBirthdayString()} + '<br>' +
+             ${pet.father.mother.mother.breeder.breederName}">0.1 - $$f32name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m44name$$, $$m44breed$$, <br>$$m44color$$,$$m44bday$$, $$m44breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.father.mother.mother.father.name} + ' из ' + ${pet.father.mother.mother.father.breeder.kennelName} + '</b> ' +
+             ${pet.father.mother.mother.father.breed.breedName} + ' ' + ${pet.father.mother.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.mother.father.color.colorName} + ' ' +
+             ${pet.father.mother.mother.father.getBirthdayString()} + ' ' +
+             ${pet.father.mother.mother.father.breeder.breederName}">1.0 - $$m44name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj">0.1 - $$f44name$$, $$f44breed$$, <br>$$f44color$$,$$f44bday$$, $$f44breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.father.mother.mother.mother.name} + ' из ' + ${pet.father.mother.mother.mother.breeder.kennelName} + '</b> ' +
+             ${pet.father.mother.mother.mother.breed.breedName} + ' ' + ${pet.father.mother.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.father.mother.mother.mother.color.colorName} + ' ' +
+             ${pet.father.mother.mother.mother.getBirthdayString()} + ' ' +
+             ${pet.father.mother.mother.mother.breeder.breederName}">0.1 - $$f44name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="5">$$f11foto$$</td>
-        <td class="tg-xldj" colspan="2" rowspan="5">0.1 - $$f11name$$<br><span
-                style="font-weight:bold">Порода:</span><br>$$f11breed$$<br><span
-                style="font-weight:bold">Окрас:</span><br>$$f11color$$<br><span
-                style="font-weight:bold">Дата рождения:</span><br>$$f11bday$$
+        <td class="tg-uys7" rowspan="5"><img width=300 height="200" th:src="${pet.mother.getImageAsBase64()}"></td>
+        <td class="tg-xldj" colspan="2" rowspan="5" th:utext="' <b>Мать</b><br>' + ${pet.mother.name} + ' из ' + ${pet.mother.breeder.kennelName} + '<br><br><span
+                style=font-weight:bold>Порода:</span><br>' + ${pet.mother.breed.breedName} + ' ' + ${pet.mother.getFurType().getFurTypeName()} + '<br><br><span
+                style=font-weight:bold>Окрас:</span><br>' + ${pet.mother.color.colorName} + '<br><br><span
+                style=font-weight:bold>Дата рождения:</span><br>' + ${pet.mother.getBirthdayString()} + '<br>'">
         </td>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m22name$$ <br>$$m22breed$$<br>$$m22color$$<br>$$m22bday$$<br>$$m22breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'1.0 - <b>' + ${pet.mother.father.name} + ' из ' + ${pet.mother.father.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.father.breed.breedName} + ' ' + ${pet.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.color.colorName} + '<br>' +
+             ${pet.mother.father.getBirthdayString()} + '<br>' +
+             ${pet.mother.father.breeder.breederName}">$$m22name$$
         </td>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m33name$$ <br>$$m33breed$$, $$m33color$$<br>$$m33bday$$<br>$$m33breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'1.0 - <b>' + ${pet.mother.father.father.name} + ' из ' + ${pet.mother.father.father.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.father.father.breed.breedName} + ' ' + ${pet.mother.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.father.color.colorName} + '<br>' +
+             ${pet.mother.father.father.getBirthdayString()} + '<br>' +
+             ${pet.mother.father.father.breeder.breederName}">1.0 - $$m33name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m45name$$, $$m45breed$$, <br>$$m45color$$,$$m45bday$$, $$m45breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.mother.father.father.father.name} + ' из ' + ${pet.mother.father.father.father.breeder.kennelName} + '</b> ' +
+             ${pet.mother.father.father.father.breed.breedName} + ' ' + ${pet.mother.father.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.father.father.color.colorName} + ' ' +
+             ${pet.mother.father.father.father.getBirthdayString()} + ' ' +
+             ${pet.mother.father.father.father.breeder.breederName}">1.0 - $$m45name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj">0.1 - $$f45name$$, $$f45breed$$, <br>$$f45color$$,$$f45bday$$, $$f45breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.mother.father.father.mother.name} + ' из ' + ${pet.mother.father.father.mother.breeder.kennelName} + '</b> ' +
+             ${pet.mother.father.father.mother.breed.breedName} + ' ' + ${pet.mother.father.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.father.mother.color.colorName} + ' ' +
+             ${pet.mother.father.father.mother.getBirthdayString()} + ' ' +
+             ${pet.mother.father.father.mother.breeder.breederName}">0.1 - $$f45name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="2">$$m21foto$$</td>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f33name$$ <br>$$f33breed$$, $$f33color$$<br>$$f33bday$$<br>$$f33breeder$$
+        <td class="tg-uys7" rowspan="2" >
+            <img height="85"  th:src="${pet.mother.father.getImageAsBase64()}">
+<!--            $$m22foto$$-->
         </td>
-        <td class="tg-xldj">1.0 - $$m46name$$, $$m46breed$$, <br>$$m46color$$,$$m46bday$$, $$m46breeder$$</td>
-    </tr>
-    <tr>
-        <td class="tg-xldj">0.1 - $$f46name$$, $$f46breed$$, <br>$$f46color$$,$$f46bday$$, $$f46breeder$$</td>
-    </tr>
-    <tr>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f22name$$ <br>$$f22breed$$<br>$$f22color$$<br>$$f22bday$$<br>$$f22breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.mother.father.mother.name} + ' из ' + ${pet.mother.father.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.father.mother.breed.breedName} + ' ' + ${pet.mother.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.mother.color.colorName} + '<br>' +
+             ${pet.mother.father.mother.getBirthdayString()} + '<br>' +
+             ${pet.mother.father.mother.breeder.breederName}">0.1 - $$f33name$$
         </td>
-        <td class="tg-xldj" rowspan="2">1.0 - $$m34name$$ <br>$$m34breed$$, $$m34color$$<br>$$m34bday$$<br>$$m34breeder$$
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.mother.father.mother.father.name} + ' из ' + ${pet.mother.father.mother.father.breeder.kennelName} + '</b> ' +
+             ${pet.mother.father.mother.father.breed.breedName} + ' ' + ${pet.mother.father.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.mother.father.color.colorName} + ' ' +
+             ${pet.mother.father.mother.father.getBirthdayString()} + ' ' +
+             ${pet.mother.father.mother.father.breeder.breederName}">1.0 - $$m46name$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.mother.father.mother.mother.name} + ' из ' + ${pet.mother.father.mother.mother.breeder.kennelName} + '</b> ' +
+             ${pet.mother.father.mother.mother.breed.breedName} + ' ' + ${pet.mother.father.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.father.mother.mother.color.colorName} + ' ' +
+             ${pet.mother.father.mother.mother.getBirthdayString()} + ' ' +
+             ${pet.mother.father.mother.mother.breeder.breederName}">0.1 - $$f46name$$</td>
+    </tr>
+    <tr>
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.mother.mother.name} + ' из ' + ${pet.mother.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.mother.breed.breedName} + ' ' + ${pet.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.color.colorName} + '<br>' +
+             ${pet.mother.mother.getBirthdayString()} + '<br>' +
+             ${pet.mother.mother.breeder.breederName}">$$f22name$$
         </td>
-        <td class="tg-xldj">1.0 - $$m47name$$, $$m47breed$$, <br>$$m47color$$,$$m47bday$$, $$m47breeder$$</td>
-    </tr>
-    <tr>
-        <td class="tg-xldj" colspan="3" rowspan="3"><span style="font-weight:bold">Заводчик:</span><br>$$f11breeder$$
+        <td class="tg-xldj" rowspan="2" th:utext="'1.1 - <b>' + ${pet.mother.mother.father.name} + ' из ' + ${pet.mother.mother.father.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.mother.father.breed.breedName} + ' ' + ${pet.mother.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.father.color.colorName} + '<br>' +
+             ${pet.mother.mother.father.getBirthdayString()} + '<br>' +
+             ${pet.mother.mother.father.breeder.breederName}">1.0 - $$m34name$$
         </td>
-        <td class="tg-xldj">0.1 - $$f47name$$, $$f47breed$$, <br>$$f47color$$,$$f47bday$$, $$f47breeder$$</td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.mother.mother.father.father.name} + ' из ' + ${pet.mother.mother.father.father.breeder.kennelName} + '</b> ' +
+             ${pet.mother.mother.father.father.breed.breedName} + ' ' + ${pet.mother.mother.father.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.father.father.color.colorName} + ' ' +
+             ${pet.mother.mother.father.father.getBirthdayString()} + ' ' +
+             ${pet.mother.mother.father.father.breeder.breederName}">1.0 - $$m47name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" rowspan="2">$$f22foto$$</td>
-        <td class="tg-xldj" rowspan="2">0.1 - $$f34name$$ <br>$$f34breed$$, $$f34color$$<br>$$f34bday$$<br>$$f34breeder$$
+        <td class="tg-xldj" colspan="3" rowspan="3"><span th:utext="'<b>Заводчик: </b>' + ${pet.mother.breeder.breederName}" ></span>
         </td>
-        <td class="tg-xldj">1.0 - $$m48name$$, $$m48breed$$, <br>$$m48color$$,$$m48bday$$, $$m48breeder$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.mother.mother.father.mother.name} + ' из ' + ${pet.mother.mother.father.mother.breeder.kennelName} + '</b> ' +
+             ${pet.mother.mother.father.mother.breed.breedName} + ' ' + ${pet.mother.mother.father.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.father.mother.color.colorName} + ' ' +
+             ${pet.mother.mother.father.mother.getBirthdayString()} + ' ' +
+             ${pet.mother.mother.father.mother.breeder.breederName}">0.1 - $$f47name$$</td>
     </tr>
     <tr>
-        <td class="tg-xldj">0.1 - $$f48name$$, $$f48breed$$, <br>$$f48color$$,$$f48bday$$, $$f48breeder$$</td>
+        <td class="tg-uys7" rowspan="2">
+            <img height="85"  th:src="${pet.mother.mother.getImageAsBase64()}">
+<!--            $$f22foto$$-->
+        </td>
+        <td class="tg-xldj" rowspan="2" th:utext="'0.1 - <b>' + ${pet.mother.mother.mother.name} + ' из ' + ${pet.mother.mother.mother.breeder.kennelName} + '</b><br>' +
+             ${pet.mother.mother.mother.breed.breedName} + ' ' + ${pet.mother.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.mother.color.colorName} + '<br>' +
+             ${pet.mother.mother.mother.getBirthdayString()} + '<br>' +
+             ${pet.mother.mother.mother.breeder.breederName}">0.1 - $$f34name$$
+        </td>
+        <td class="tg-xldj" th:utext="'1.0 - <b>' + ${pet.mother.mother.mother.father.name} + ' из ' + ${pet.mother.mother.mother.father.breeder.kennelName} + '</b> ' +
+             ${pet.mother.mother.mother.father.breed.breedName} + ' ' + ${pet.mother.mother.mother.father.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.mother.father.color.colorName} + ' ' +
+             ${pet.mother.mother.mother.father.getBirthdayString()} + ' ' +
+             ${pet.mother.mother.mother.father.breeder.breederName}">1.0 - $$m48name$$</td>
     </tr>
     <tr>
-        <td class="tg-uys7" colspan="4">Дата выдачи: $$issueDate$$</td>
+        <td class="tg-xldj" th:utext="'0.1 - <b>' + ${pet.mother.mother.mother.mother.name} + ' из ' + ${pet.mother.mother.mother.mother.breeder.kennelName} + '</b> ' +
+             ${pet.mother.mother.mother.mother.breed.breedName} + ' ' + ${pet.mother.mother.mother.mother.getFurType().getFurTypeName()} + '<br>' +
+             ${pet.mother.mother.mother.mother.color.colorName} + ' ' +
+             ${pet.mother.mother.mother.mother.getBirthdayString()} + ' ' +
+             ${pet.mother.mother.mother.mother.breeder.breederName}">0.1 - $$f48name$$</td>
+    </tr>
+    <tr>
+        <td class="tg-uys7" colspan="4" th:text="'Дата выдачи: ' + ${creationDate}">Дата выдачи: $$issueDate$$</td>
         <td class="tg-xldj" colspan="2">Подпись:</td>
     </tr>
     <tr>

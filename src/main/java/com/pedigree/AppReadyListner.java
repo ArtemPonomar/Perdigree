@@ -5,6 +5,7 @@ import com.pedigree.service.DateService;
 import com.pedigree.repository.ColorRepository;
 import com.pedigree.repository.PetRepository;
 import com.pedigree.service.BreederService;
+import com.pedigree.service.PedigreeService;
 import com.pedigree.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -16,6 +17,9 @@ import java.text.ParseException;
 
 @Component
 public class AppReadyListner {
+
+    @Autowired
+    private PedigreeService pedigreeService;
 
     @Autowired
     private DateService dateService;
@@ -34,6 +38,11 @@ public class AppReadyListner {
 
     @EventListener(ApplicationReadyEvent.class)
     private void init() throws ParseException {
+//        pedigreeService.downloadPedigree(50);
+
+//        Pet pet = petRepository.findAll().get(0);
+//        System.out.println(pet.getImageAsBase64());
+//
 //        PetFormParameters pfp = petService.getPetFormParameters();
 //        for (Breed breed : pfp.getBreeds()){
 //            System.out.println(breed.getBreedName() + " ");
@@ -43,7 +52,7 @@ public class AppReadyListner {
 //            System.out.println(color.getColorName() + " ");
 //        }
 //        System.out.println("---------------------------------");
-//        for (Breeder breeder : pfp.getBreeders()){
+//        for (Breeder breeder : pfp.getFurTypes()){
 //            System.out.println(breeder.getKennelName() + " ");
 //        }
 //        System.out.println("---------------------------------");
@@ -74,7 +83,7 @@ public class AppReadyListner {
 //        mom.setBreeder(breederService.findByKennelName("Терем-теремок"));
 //        mom.setColor(new Color("Коричневый мардер"));
 //        mom.setFather(null);
-//        mom.setGender(Gender.female);
+//        mom.setGender(Gender.female01);
 //        mom.setImagePath("C:\\Users\\User\\Desktop\\Perdigree\\petImages\\39.jpg");
 //        mom.setMetricId("NEW_metric_id");
 //        mom.setMother(null);
@@ -89,7 +98,7 @@ public class AppReadyListner {
 //        dad.setBreeder(breederService.findByKennelName("Терем-теремок"));
 //        dad.setColor(new Color("Сиамская желтая"));
 //        dad.setFather(null);
-//        dad.setGender(Gender.male);
+//        dad.setGender(Gender.male10);
 //        dad.setImagePath("C:\\Users\\User\\Desktop\\Perdigree\\petImages\\2572272.jpg");
 //        dad.setMetricId("NEW_metric_id");
 //        dad.setMother(null);
@@ -104,7 +113,7 @@ public class AppReadyListner {
 //        pet.setBreeder(breederService.findByKennelName("Терем-теремок"));
 //        pet.setColor(new Color("Сиамская коричневая"));
 //        pet.setFather(dad);
-//        pet.setGender(Gender.female);
+//        pet.setGender(Gender.female01);
 //        pet.setImagePath("petImages/IMG_3968.jpg");
 //        pet.setMetricId("NEW_metric_id");
 //        pet.setMother(mom);

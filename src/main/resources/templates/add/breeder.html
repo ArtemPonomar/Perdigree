@@ -7,11 +7,11 @@
 <div th:replace="fragments :: navbar"></div>
 
 <div class="container">
-    <form method="post" action="add_breeder" class="needs-validation" validate>
+    <form method="post" action="breeder" class="needs-validation">
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_name">Имя заводчика</label>
-                <input type="text" class="form-control" id="breeder_name" name="breederName" required>
+                <input type="text" class="form-control" id="breeder_name" name="breederName">
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -28,7 +28,7 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_email">Почта заводчика</label>
-                <input type="email" class="form-control" id="breeder_email" name="breederEmail" required>
+                <input type="email" class="form-control" id="breeder_email" name="breederEmail">
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -36,7 +36,7 @@
 
             <div class="col-md-4 mb-3">
                 <label for="breeder_number">Телефон заводчика</label>
-                <input type="tel" class="form-control" id="breeder_number" name="breederNumber" required>
+                <input type="tel" class="form-control" id="breeder_number" name="breederNumber">
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -46,15 +46,15 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="breeder_site_address">Сайт питомника</label>
-                <input type="url" class="form-control" id="breeder_site_address" name="breederSite" placeholder="http://...">
+                <input type="text" class="form-control" id="breeder_site_address" name="breederSite">
                 <div class="invalid-feedback">
-                    Введите адрес сайта, начиная с http://, или оставьте поле пустым
+                    Введите адрес сайта, или оставьте поле пустым
                 </div>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="breeder_address">Адрес заводчика</label>
-                <input type="url" class="form-control" id="breeder_address" name="breederAddress" required>
+                <input class="form-control" id="breeder_address" name="breederAddress">
                 <div class="invalid-feedback">
                     Введите адрес заводчика, например: Украина,Киев.
                 </div>
@@ -83,6 +83,7 @@
     });
   }, false);
 })();
+
 </script>
 </body>
 </html>

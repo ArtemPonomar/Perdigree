@@ -1,9 +1,6 @@
 package com.pedigree.entity;
 
-import com.pedigree.entity.pet_related.Breed;
-import com.pedigree.entity.pet_related.Color;
-import com.pedigree.entity.pet_related.Pet;
-import com.pedigree.entity.pet_related.Species;
+import com.pedigree.entity.pet_related.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ public class PetFormParameters {
     List<Pet> males;
     List<Pet> females;
     List<Breeder> breeders;
+    List<FurType> furTypes;
     String birthday;
 
     public String getBirthday() {
@@ -70,5 +68,13 @@ public class PetFormParameters {
 
     public void setBreeders(List<Breeder> breeders) {
         this.breeders = breeders;
+    }
+
+    public List<FurType> getFurTypes() {
+        return furTypes;
+    }
+
+    public void setFurTypes(List<FurType> furTypes) {
+        this.furTypes = furTypes;
     }
 }

@@ -1,13 +1,11 @@
 package com.pedigree.service;
 
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class DateService {

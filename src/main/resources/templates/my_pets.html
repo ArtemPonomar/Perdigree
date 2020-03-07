@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title" th:if="${pet.getName() != null and pet.getBreeder() != null}" th:text="${pet.getName()} + ' из ' + ${pet.getBreeder().getKennelName()}"></h5>
-            <p class="card-text" th:if="${pet.getSpecies() != null and pet.getBreed() != null}" th:text="${pet.getSpecies().getSpeciesName()} + ' породы ' + ${pet.getBreed().getBreedName()}"></p>
+            <p class="card-text" th:if="${pet.getSpecies() != null and pet.getBreed() != null}" th:text="${pet.getSpecies().getSpeciesName()} + ' породы ' + ${pet.getBreed().getBreedName()} + ' ' + ${pet.getFurType().getFurTypeName()}"></p>
             <p class="card-text" th:if="${pet.getColor() != null}" th:text="'Окрас ' + ${pet.getColor().getColorName()}"></p>
         </div>
         <div class=" card-body text-right">
