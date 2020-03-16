@@ -40,7 +40,7 @@ public class PetService {
     private FurTypeRepository furTypeRepository;
 
     @Transactional
-    public String savePetFromParameters(Long petId, String pedigreeId, String petName, String birthDate, Long speciesId, String gender, MultipartFile photo, String metric, Long breedId, Long furTypeId, Long colorId, Long breederId, Long fatherId, Long motherId) throws IllegalArgumentException, ParseException {
+    public String savePetFromParameters(Long petId, String pedigreeId, String petName, String birthDate, Long speciesId, String gender, MultipartFile photo, String metric, String tattoo, Long breedId, Long furTypeId, Long colorId, Long breederId, Long fatherId, Long motherId) throws IllegalArgumentException, ParseException {
         Pet newPet = findById(petId);
         if (newPet == null) newPet = new Pet();
         newPet.setId(petId);
@@ -50,6 +50,7 @@ public class PetService {
         newPet.setSpecies(speciesRepository.findById(speciesId).get());
         newPet.setGender(gender);
         newPet.setMetricId(metric);
+        newPet.setTattoo(tattoo);
         newPet.setBreed(breedRepository.findById(breedId).get());
         newPet.setFurType(furTypeRepository.findById(furTypeId).get());
         newPet.setColor(colorRepository.findById(colorId).get());

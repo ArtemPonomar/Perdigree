@@ -37,6 +37,7 @@
         </select>
         <script>
             $('#speciesId').selectize();
+
         </script>
 
         <label for="female">Пол питомца</label>
@@ -65,14 +66,19 @@
                     </div>
                 </div>
                 <div th:if="${pet.getImagePath() != null}">
-                    <button type="submit" class="btn btn-danger mt-2" th:formaction="@{'/delete_image/' + ${pet.getId()}}">
+                    <button type="submit" class="btn btn-danger mt-2"
+                            th:formaction="@{'/delete_image/' + ${pet.getId()}}">
                         Удалить
                     </button>
                 </div>
             </div>
         </div>
+
         <label for="metric">Метрика</label>
         <input type="text" class="form-control" id="metric" name="metric" th:value="${pet.getMetricId()}">
+
+        <label for="tattoo">Тату</label>
+        <input type="text" class="form-control" id="tattoo" name="tattoo" th:value="${pet.getTattoo()}">
 
         <label for="breedName">Порода питомца</label>
         <select id="breedName" name="breedId" class="form-control form-control-sm" required>
@@ -84,6 +90,7 @@
         </select>
         <script>
             $('#breedName').selectize();
+
         </script>
 
         <label for="colorName">Окрас питомца</label>
@@ -96,6 +103,7 @@
         </select>
         <script>
             $('#colorName').selectize();
+
         </script>
 
         <label for="breederId">Заводчик</label>
@@ -108,6 +116,7 @@
         </select>
         <script>
             $('#breederId').selectize();
+
         </script>
 
         <label for="furTypeName">Тип шерсти</label>
@@ -131,6 +140,7 @@
             $('#fatherId').selectize({
                 allowEmptyOption: true,
             });
+
         </script>
         <label for="mother">Мать</label>
         <select id="mother" name="motherId" class="form-control form-control-sm">
@@ -145,6 +155,7 @@
                 allowEmptyOption: true,
             });
 
+
         </script>
         <button class="btn btn-success mt-2" type="submit">Сохранить</button>
     </form>
@@ -154,6 +165,7 @@
         var fileName = document.getElementById("petPhotoFile").files[0].name;
         $(this).next('.custom-file-label').html(fileName);
     })
+
 </script>
 </body>
 </html>

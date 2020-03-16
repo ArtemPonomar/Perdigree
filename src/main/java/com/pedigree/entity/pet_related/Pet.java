@@ -1,10 +1,7 @@
 package com.pedigree.entity.pet_related;
 
 import com.pedigree.entity.Breeder;
-import com.pedigree.service.ImageService;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.File;
@@ -22,7 +19,7 @@ public class Pet {
     private Long id;
 
     @Column
-    private String tatoo;
+    private String tattoo;
 
     @Column
     private String pedigreeId;
@@ -97,12 +94,12 @@ public class Pet {
         return pedigreeId;
     }
 
-    public String getTatoo() {
-        return tatoo;
+    public String getTattoo() {
+        return tattoo;
     }
 
-    public void setTatoo(String tatoo) {
-        this.tatoo = tatoo;
+    public void setTattoo(String tattoo) {
+        this.tattoo = tattoo;
     }
 
     public void setPedigreeId(String pedigreeId) {
