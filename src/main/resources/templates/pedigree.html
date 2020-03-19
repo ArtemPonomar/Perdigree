@@ -35,9 +35,10 @@
             кролиководства<br>"Забавные кролики"<br>питомник<br>"Терем-теремок"
         </td>
         <td class="tg-93b8" th:text="'Кличка: ' + ${pet.getName()} + ' из ' + ${pet.breeder.kennelName}"></td>
+
         <td class="tg-xldj" th:text="'Пол: ' + ${pet.getGender()}"></td>
         <td class="tg-uys7"
-            th:text="'Метрика: ' + ${pet.getMetricId()} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: ' + ${pet.getPedigreeId()}"></td>
+            th:text="'Метрика: ' + ${pet.getMetricId()} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tattoo: ' + ${pet.getTattoo()}"></td>
     </tr>
     <tr>
         <td class="tg-xldj" colspan="2" th:text="'Порода: ' + ${pet.breed.getBreedName()} + ' ' + ${pet.getFurType().getFurTypeName()}"></td>
